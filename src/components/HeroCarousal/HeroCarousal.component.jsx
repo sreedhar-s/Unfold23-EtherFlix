@@ -25,7 +25,7 @@ const HeroCarousel = () => {
     infinite: true,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    prevArrow: <PrevArrow />
   };
   
   const settings = {
@@ -47,7 +47,7 @@ const HeroCarousel = () => {
           {images.map((image) => (
             <div className="w-full h-58 md:h-72 py-3">
               <img
-                src={`https://image.tmdb.org/t/p/original${image.backdrop_path}`}
+                src={image}
                 alt="testing"
                 className="object-cover w-full h-full"
               />
