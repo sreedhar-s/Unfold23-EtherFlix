@@ -3,17 +3,22 @@ import HeroSlider from "react-slick";
 import axios from "axios";
 
 // compoents
-import { NextArrow, PrevArrow} from './Arrows.componet';
+import { NextArrow, PrevArrow } from './Arrows.componet';
 
 const HeroCarousel = () => {
+  const [images, setImages] = useState([]);
 
-  const images = [
-    "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@star-icon-202203010609.png,ox-24,oy-615,ow-29:ote-OC41LzEwICAxMDUuOEsgVm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00351731-datlgvlndw-portrait.jpg",
-    "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@star-icon-202203010609.png,ox-24,oy-615,ow-29:ote-OC41LzEwICAxMDUuOEsgVm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00351731-datlgvlndw-portrait.jpg",
-    "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@star-icon-202203010609.png,ox-24,oy-615,ow-29:ote-OC41LzEwICAxMDUuOEsgVm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00351731-datlgvlndw-portrait.jpg",
-    "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@star-icon-202203010609.png,ox-24,oy-615,ow-29:ote-OC41LzEwICAxMDUuOEsgVm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00351731-datlgvlndw-portrait.jpg",
-    "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:oi-discovery-catalog@@icons@@star-icon-202203010609.png,ox-24,oy-615,ow-29:ote-OC41LzEwICAxMDUuOEsgVm90ZXM%3D,ots-29,otc-FFFFFF,oy-612,ox-70:q-80/et00351731-datlgvlndw-portrait.jpg"
-  ]
+  useEffect(() => {
+    //async
+    const requestNowPlayingImages = async () => {
+      const getImages = await axios.get("/movie/now_playing");
+      setImages(getImages.data.results);
+    };
+
+    requestNowPlayingImages();
+  }, []);
+
+  console.log(images)
 
   const settingsLG = {
     dots:true,
@@ -25,7 +30,7 @@ const HeroCarousel = () => {
     infinite: true,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />
+    prevArrow: <PrevArrow />,
   };
   
   const settings = {
@@ -47,7 +52,7 @@ const HeroCarousel = () => {
           {images.map((image) => (
             <div className="w-full h-58 md:h-72 py-3">
               <img
-                src={image}
+                src={`https://image.tmdb.org/t/p/original${image.backdrop_path}`}
                 alt="testing"
                 className="object-cover w-full h-full"
               />
@@ -61,7 +66,7 @@ const HeroCarousel = () => {
           {images.map((image) => (
             <div className="w-full h-96 px-1 py-2 m-3">
               <img
-                src={image}
+                src={`https://image.tmdb.org/t/p/original${image.backdrop_path}`}
                 alt="testing"
                 className="w-full h-full rounded-md"
               />
