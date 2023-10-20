@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { BiChevronDown, BiChevronRight, BiMenu, BiSearch } from "react-icons/bi";
+
+
+//components
+import SignUp from "../../Auth/Signup";
 
 const NavSm = () => {
   return (
@@ -32,7 +36,7 @@ const NavMd = () => {
   );
 };
 
-const NavLg = () => {
+const NavLg = ({SignUp}) => {
   return (
     <>
       <div className="container mx-auto flex items-center justify-between">
@@ -54,7 +58,7 @@ const NavLg = () => {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <button className="px-2 py-1 w-20 text-md font-bold rounded text-white bg-red-600">Login</button>
+          <button onClick={SignUp} className="px-2 py-1 w-20 text-md font-bold rounded text-white bg-red-600">Login</button>
         </div>
       </div>
     </>
@@ -62,8 +66,12 @@ const NavLg = () => {
 };
 
 const Navbar = () => {
+  const [openSignup, setOpenSignup] = useState(false);
+  const openSignUpModal = () => setOpenSignup(true);
+
   return (
     <>
+     <SignUp isOpen={openSignup} setIsOpen={setOpenSignup} />
       <nav className="bg-bms-700 p-4">
         <div className="md:hidden">
           {/* Mobile Screen */}
@@ -75,7 +83,7 @@ const Navbar = () => {
         </div>
         <div className="hidden lg:flex">
           {/* Large screen */}
-          <NavLg />
+          <NavLg SignUp={openSignUpModal} />
         </div>
       </nav>
     </>
