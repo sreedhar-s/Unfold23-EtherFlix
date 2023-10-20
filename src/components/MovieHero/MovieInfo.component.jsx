@@ -36,13 +36,11 @@ const MovieInfo = () => {
           </div>
           <div className="flex items-center gap-3 md:px-4 md:w-screen lg:w-full">
             <button
-              onClick={rentMovies}
               className="bg-red-600 w-full py-3 text-white font-semibold rounded-lg"
             >
               Rent ₹149
             </button>
             <button
-              onClick={buyMovies}
               className="bg-red-600 w-full py-3 text-white font-semibold rounded-lg"
             >
               Buy ₹599
@@ -55,3 +53,4 @@ const MovieInfo = () => {
 };
 
 export default MovieInfo;
+

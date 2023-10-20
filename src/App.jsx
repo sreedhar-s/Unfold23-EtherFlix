@@ -6,6 +6,7 @@ import axios from 'axios';
 import DefaultHOC from './HOC/DefaultHOC';
 import MovieHOC from './HOC/MovieHOC';
 import MovieNavbar from './components/Navbar/Movienavbar.component';
+import MovieHero from './components/MovieHero/MovieHero.component';
 
 //Import css files
 import "slick-carousel/slick/slick.css";
@@ -21,7 +22,7 @@ const App = () => {
     <>
       <Routes>
         <Route path="/*" element={<DefaultHOC />} />
-        <Route path="/movie/:id" element={<MovieNavbar />} />
+        <Route path="/movie/:id" element={<MovieHOC />} />
       </Routes>
     </>
   )
