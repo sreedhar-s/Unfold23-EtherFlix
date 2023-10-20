@@ -5,6 +5,7 @@ import axios from "axios";
 //components
 import MovieHero from "../components/MovieHero/MovieHero.component";
 import Cast from "../components/Cast/cast.component";
+import PosterSlider from "../components/PosterSlider/PosterSlider.component";
 
 //context
 import { MovieContext } from "../context/movie.context";
@@ -16,6 +17,8 @@ const MoviePage = () => {
     const {movie} = useContext(MovieContext);
     const [cast, setCaste] = useState([]);
     const {id} = useParams();
+    const [similarMovies, setSimilarMovies] = useState([]);
+
     
     useEffect(() => {
         const requestCast = async () => {
@@ -25,6 +28,48 @@ const MoviePage = () => {
 
         requestCast();
     }, [id]);
+
+    useEffect(() => {
+        const requestSimilarMovies = async () => {
+        const getSimilarMovies = await axios.get(`/movie/${id}/similar`);
+        setSimilarMovies(getSimilarMovies.data.results);
+        };
+
+        requestSimilarMovies();
+    }, [id]);
+
+    const settings = {
+        infinite: false,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        InitialSlide: 0,
+        responsive: [
+        {
+            breakpoints: 1024,
+            settings: {
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            infinite: true,
+            },
+        },
+        {
+            breakpoints: 768,
+            settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            InitialSlide: 2,
+            },
+        },
+        {
+            breakpoints: 640,
+            settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            },
+        },
+        ],
+    };
 
     const settingsCast = {
         infinite: true,
@@ -121,6 +166,20 @@ const MoviePage = () => {
                         />
                     ))}
                 </Slider>
+              </div>
+
+
+              <div className="my-8">
+                <hr />
+              </div>
+
+              <div className="my-8">
+                <PosterSlider
+                    config={settings}
+                    images={similarMovies}
+                    title="You might Also like"
+                    isDark={false}
+                />
               </div>
             </div> 
         </>
