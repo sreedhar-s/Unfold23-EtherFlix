@@ -1,9 +1,17 @@
-import React from 'react'
+import React from 'react';
+import { Route, Routes } from "react-router-dom";
+
+//components
+import DefaultHOC from './HOC/DefaultHOC';
+import Navbar from './components/Navbar/navbar.component';
+
 
 const App = () => {
   return (
     <>
-      <h1 className='text-blue-600'>Hello World</h1>
+      <Routes>
+        <Route path="/*" element={<Navbar />} />
+      </Routes>
     </>
   )
 }
