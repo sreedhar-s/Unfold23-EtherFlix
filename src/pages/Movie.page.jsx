@@ -18,7 +18,7 @@ const MoviePage = () => {
     const [cast, setCaste] = useState([]);
     const {id} = useParams();
     const [similarMovies, setSimilarMovies] = useState([]);
-
+    const [recommended, setRecommended] = useState([]);
     
     useEffect(() => {
         const requestCast = async () => {
@@ -36,6 +36,17 @@ const MoviePage = () => {
         };
 
         requestSimilarMovies();
+    }, [id]);
+
+    useEffect(() => {
+        const requestRecommendedMovies = async () => {
+        const getRecommendedMovies = await axios.get(
+            `/movie/${id}/recommendations`
+        );
+        setRecommended(getRecommendedMovies.data.results);
+        };
+
+        requestRecommendedMovies();
     }, [id]);
 
     const settings = {
@@ -178,6 +189,19 @@ const MoviePage = () => {
                     config={settings}
                     images={similarMovies}
                     title="You might Also like"
+                    isDark={false}
+                />
+              </div>
+
+              <div className="my-8">
+                <hr />
+              </div>
+
+              <div className="my-8">
+                <PosterSlider
+                    config={settings}
+                    images={recommended}
+                    title="MS EXCLUSIVE"
                     isDark={false}
                 />
               </div>
