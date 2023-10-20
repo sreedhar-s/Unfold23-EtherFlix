@@ -5,7 +5,7 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom";
 
 //context Provider
-import MovieProvider from './Context/movie.context';
+import MovieProvider from './context/movie.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

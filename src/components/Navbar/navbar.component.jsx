@@ -4,6 +4,8 @@ import { BiChevronDown, BiChevronRight, BiMenu, BiSearch } from "react-icons/bi"
 
 //components
 import SignUp from "../../Auth/Signup";
+import logo from "../../assets/logo.jpeg";
+
 
 const NavSm = () => {
   return (
@@ -41,11 +43,11 @@ const NavLg = ({SignUp}) => {
     <>
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center w-2/5 gap-3">
-          <div className="w-12 h-12">
+          <div className="w-8 h-8">
             <img
-              src=""
+              src={logo}
               alt="logo"
-              className="w-full h-full"
+              className="w-full h-full rounded-sm"
             />
           </div>
           <div className="w-full flex items-center gap-3 bg-white p-2 rounded-md">
@@ -58,7 +60,7 @@ const NavLg = ({SignUp}) => {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <button onClick={SignUp} className="px-2 py-1 w-20 text-md font-bold rounded text-white bg-red-600">Login</button>
+          <button onClick={SignUp} className="px-2 py-1 w-20 text-md font-bold rounded text-white bg-sky-500">Login</button>
         </div>
       </div>
     </>
@@ -72,7 +74,7 @@ const Navbar = () => {
   return (
     <>
      <SignUp isOpen={openSignup} setIsOpen={setOpenSignup} />
-      <nav className="bg-bms-700 p-4">
+      <nav className="bg-black p-4">
         <div className="md:hidden">
           {/* Mobile Screen */}
           <NavSm />
