@@ -2,6 +2,8 @@ import React from 'react';
 import { Route, Routes } from "react-router-dom";
 import axios from 'axios';
 
+
+
 //components
 import DefaultHOC from './HOC/DefaultHOC';
 import MovieHOC from './HOC/MovieHOC';

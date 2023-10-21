@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { BiChevronDown, BiChevronRight, BiMenu, BiSearch, BiShareAlt } from "react-icons/bi";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 //context
 import { MovieContext } from "../../context/movie.context";
@@ -45,7 +46,7 @@ const NavLg = () => {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <button onClick={SignUp} className="px-2 py-1 w-20 text-md font-bold rounded text-white bg-sky-500">Login</button>
+          <ConnectButton />
         </div>
       </div>
     </>

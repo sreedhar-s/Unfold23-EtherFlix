@@ -1,13 +1,51 @@
 import React, { useContext, useState } from "react";
+import { ethers, Contract } from "ethers";
+import { rentContractABI, rentContractAddress } from "../../interaction";
 
 // Context
 import { MovieContext } from "../../context/movie.context";
+
 
 const MovieInfo = () => {
   const { movie } = useContext(MovieContext);
 
   // optional chaining.
   const genres = movie.genres?.map(({ name }) => name).join(", ");
+
+  const rpcUrl = "https://eth-sepolia.g.alchemy.com/v2/Mh8H4AwGx8daVdv_gbTV055ghqVFtzpP";
+  const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+  const wallet = new ethers.Wallet(import.meta.env.VITE_PUBLIC_WALLET_PRIVATE_KEY, provider);
+
+
+  async function callContract(action) {
+      try {
+        if (window.ethereum) {
+          await window.ethereum.request({ method: 'eth_requestAccounts' });
+          const numberContract = new Contract(rentContractAddress, rentContractABI, wallet);
+
+          if (action === 'rent') {
+            // Call the rent function on the contract
+            const rentTxn = await numberContract.connect(wallet).rentMovie({
+              value: ethers.utils.parseEther('0.0019'),
+            });
+
+            await rentTxn.wait();
+          } else if (action === 'buy') {
+            // Call the buy function on the contract
+            const buyTxn = await numberContract.buyMovie({
+              value: ethers.utils.parseEther("0.0019"),
+            });
+
+            await buyTxn.wait();
+          }
+        } else {
+          console.log('Metamask not detected. Please install Metamask.');
+          // You can show a user-friendly message or redirect to a Metamask installation guide
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
 
   return (
     <>
@@ -34,23 +72,27 @@ const MovieInfo = () => {
               {(movie.runtime / 60).toFixed(2)} h &bull; {genres} &bull; 13+
             </h4>
           </div>
-          <div className="flex items-center gap-3 md:px-4 md:w-screen lg:w-full">
+          <div className="flex items-center gap-3 md:px-2 md:w-screen lg:w-full">
             <button
-              className="bg-red-600 w-full py-3 text-white font-semibold rounded-lg"
+              onClick={() => callContract('rent')}
+              className="bg-sky-700 w-full py-3 text-white font-semibold rounded-lg"
             >
-              Rent ₹149
+              Rent @0.00019ETH
             </button>
             <button
-              className="bg-red-600 w-full py-3 text-white font-semibold rounded-lg"
+              onClick={() => callContract('buy')}
+              className="bg-sky-700 w-full py-6 text-white font-semibold rounded-lg"
             >
-              Buy ₹599
+              Buy @0.0019ETH
             </button>
+            <script src="interaction.js"></script>  
+            <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+                type="application/javascript"></script>
           </div>
-        </div>
+        </div>  
       </div>
     </>
   );
 };
 
 export default MovieInfo;
-

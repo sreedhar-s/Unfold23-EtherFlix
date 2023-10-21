@@ -133,37 +133,18 @@ const MoviePage = () => {
                 </div>
                 <div className="my-8">
                     <h2 className="text-gray-800 text-2xl font-bold mb-3">
-                        Applicable Offers
+                        Applicable Offer
                     </h2>
-                    <div className="flex  flex-col gap-3 lg:flex-row">
-                        <div className="flex items-start gap-2 bg-yellow-100 rounded-lg border-2 border-yellow-400 border-dashed p-3">
-                        <div className="w-8 h-8">
-                            <FaCcVisa className="w-full h-full" />
-                        </div>
-                        <div className="flex flex-col items-start">
-                            <h3 className="text-gray-700 text-xl font-bold">
-                            Visa Stream Offer
-                            </h3>
-                            <p className="text-gray-600">
-                            Get 50% off up to INR 150 on all RuPay cards* on BookMyShow
-                            Stream.
-                            </p>
-                        </div>
-                    </div>
 
                     <div className="flex items-start gap-2 bg-yellow-100 rounded-lg border-2 border-yellow-400 border-dashed p-3">
-                        <div className="w-8 h-8">
-                            <FaCcApplePay className="w-full h-full" />
-                        </div>
                         <div className="flex flex-col items-start">
-                            <h3 className="text-gray-700 text-xl font-bold">Filmy Pass</h3>
+                            <h3 className="text-gray-700 text-xl font-bold">New User Offer</h3>
                             <p className="text-gray-600">
-                            Get Rs.75* off on 3 movies you buy/rent on Stream. Buy Filmy
-                            Pass @Rs.99
+                                Receive a complimentary movie rental pass valued at 0.0019 ETH when you make a purchase of at least 0.0019 ETH.                                                                                                                            
                             </p>
                         </div>
                     </div>
-                </div>
+                <div/>
               </div>
 
               <div className="my-8">
@@ -201,7 +182,7 @@ const MoviePage = () => {
                 <PosterSlider
                     config={settings}
                     images={recommended}
-                    title="MS EXCLUSIVE"
+                    title="Ether Exclusive"
                     isDark={false}
                 />
               </div>
